@@ -66,38 +66,38 @@ const {
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', () => {-->
+<!--        const mobileMenuBtn = document.getElementById('mobile-menu-btn');-->
+<!--        const mobileMenu = document.getElementById('mobile-menu');-->
 
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
+<!--        if (mobileMenuBtn && mobileMenu) {-->
+<!--            mobileMenuBtn.addEventListener('click', () => {-->
+<!--                mobileMenu.classList.toggle('hidden');-->
+<!--            });-->
+<!--        }-->
 
-        // Smooth scroll para los enlaces
-        const links = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+<!--        // Smooth scroll para los enlaces-->
+<!--        const links = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');-->
 
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
+<!--        links.forEach(link => {-->
+<!--            link.addEventListener('click', (e) => {-->
+<!--                e.preventDefault();-->
 
-                const href = link.getAttribute('href');
-                if (!href) return; // Evita null
+<!--                const href = link.getAttribute('href');-->
+<!--                if (!href) return; // Evita null-->
 
-                const target = document.querySelector(href);
-                if (target) {
-                    const headerHeight = 80;
-                    const targetPosition = (target as HTMLElement).offsetTop - headerHeight;
+<!--                const target = document.querySelector(href);-->
+<!--                if (target) {-->
+<!--                    const headerHeight = 80;-->
+<!--                    const targetPosition = (target as HTMLElement).offsetTop - headerHeight;-->
 
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    });
-</script>
+<!--                    window.scrollTo({-->
+<!--                        top: targetPosition,-->
+<!--                        behavior: 'smooth'-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->

@@ -9,14 +9,14 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Dale Delivery - Entregamos rápido, seguro y sin complicaciones">
-    <Header />
+    <Header/>
     <main>
-        <HeroSection />
-        <ServicesSection />
-        <WhyChooseUs />
-        <ContactSection />
+        <HeroSection/>
+        <ServicesSection/>
+        <WhyChooseUs/>
+        <ContactSection/>
     </main>
-    <Footer />
+    <Footer/>
 </Layout>
 
 <style>
@@ -83,5 +83,61 @@ import Footer from '../components/Footer.astro';
     .hover-lift:hover {
         transform: translateY(-5px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animation improvements */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Focus states for accessibility */
+    button:focus,
+    a:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: 2px solid #f97316;
+        outline-offset: 2px;
+    }
+
+    /* Mobile tap highlights */
+    button, a {
+        -webkit-tap-highlight-color: rgba(249, 115, 22, 0.3);
+    }
+
+    /* Loading states */
+    .loading {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    .loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid transparent;
+        border-top: 2px solid #f97316;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 </style>
