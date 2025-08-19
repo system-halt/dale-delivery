@@ -44,7 +44,7 @@ export default {
                 }
             },
             backgroundImage: {
-                "header-gradient": "linear-gradient(to right, #ff3d00 20%, #ff7f00)",
+                "header-gradient": "linear-gradient(to right, #ff3d00 0%, #ff3d00 5%, #ff7f00 100%)",
             },
             fontFamily: {
                 'sans': ['Inter', 'system-ui', 'sans-serif'],
