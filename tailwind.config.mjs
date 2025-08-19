@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from 'tailwindcss/plugin'
 
 export default {
     content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -43,7 +44,7 @@ export default {
                 }
             },
             backgroundImage: {
-                "header-gradient": "linear-gradient(50deg, #ff3d00 , #ff7f00)",
+                "header-gradient": "linear-gradient(to right, #ff3d00 20%, #ff7f00)",
             },
             fontFamily: {
                 'sans': ['Inter', 'system-ui', 'sans-serif'],
@@ -67,29 +68,29 @@ export default {
             },
             keyframes: {
                 fadeIn: {
-                    '0%': { opacity: '0' },
-                    '100%': { opacity: '1' },
+                    '0%': {opacity: '0'},
+                    '100%': {opacity: '1'},
                 },
                 fadeInUp: {
-                    '0%': { opacity: '0', transform: 'translateY(30px)' },
-                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                    '0%': {opacity: '0', transform: 'translateY(30px)'},
+                    '100%': {opacity: '1', transform: 'translateY(0)'},
                 },
                 slideInLeft: {
-                    '0%': { opacity: '0', transform: 'translateX(-30px)' },
-                    '100%': { opacity: '1', transform: 'translateX(0)' },
+                    '0%': {opacity: '0', transform: 'translateX(-30px)'},
+                    '100%': {opacity: '1', transform: 'translateX(0)'},
                 },
                 slideInRight: {
-                    '0%': { opacity: '0', transform: 'translateX(30px)' },
-                    '100%': { opacity: '1', transform: 'translateX(0)' },
+                    '0%': {opacity: '0', transform: 'translateX(30px)'},
+                    '100%': {opacity: '1', transform: 'translateX(0)'},
                 },
                 bounceSubtle: {
-                    '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
-                    '40%': { transform: 'translateY(-5px)' },
-                    '60%': { transform: 'translateY(-3px)' },
+                    '0%, 20%, 50%, 80%, 100%': {transform: 'translateY(0)'},
+                    '40%': {transform: 'translateY(-5px)'},
+                    '60%': {transform: 'translateY(-3px)'},
                 },
                 float: {
-                    '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-10px)' },
+                    '0%, 100%': {transform: 'translateY(0px)'},
+                    '50%': {transform: 'translateY(-10px)'},
                 }
             },
             boxShadow: {
@@ -99,5 +100,36 @@ export default {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        plugin(function ({addUtilities}) {
+            const textShadowUtilities = {
+                '.text-shadow-sm': {
+                    textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                },
+                '.text-shadow-md': {
+                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
+                },
+                '.text-shadow-lg': {
+                    textShadow: '3px 3px 6px rgba(0, 0, 0, 0.8)',
+                },
+                '.text-shadow-3d': {
+                    textShadow: '1px 1px 0px #000, 2px 2px 0px rgba(0,0,0,0.8), 3px 3px 0px rgba(0,0,0,0.6)',
+                },
+                '.text-shadow-hero': {
+                    textShadow: '3px 3px 0px rgba(0,0,0,0.8), 6px 6px 0px rgba(0,0,0,0.6), 9px 9px 0px rgba(0,0,0,0.4), 0 0 20px rgba(0,0,0,0.7)',
+                },
+                '.text-shadow-subtitle': {
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5)',
+                },
+                '.text-shadow-glow': {
+                    textShadow: '0 0 10px rgba(255,255,255,0.5), 2px 2px 4px rgba(0,0,0,0.8)',
+                },
+                '.text-shadow-none': {
+                    textShadow: 'none',
+                },
+            }
+
+            addUtilities(textShadowUtilities)
+        })
+    ],
 };
