@@ -1,26 +1,41 @@
 ---
-export interface Props {
-    title: string;
-    description?: string;
-    }
+import SEO from "../components/SEO.astro";
+import {SITE, SEO as SEO_CONFIG} from "../config/seo";
 
-const { title, description = "Dale Delivery - Entregamos rápido, seguro y sin complicaciones" } = Astro.props;
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    keywords?: string;
+    url?: string;
+    lang: string;
+}
+
+const {
+    title = SEO_CONFIG.defaultTitle,
+    description = SEO_CONFIG.defaultDescription,
+    image = SITE.defaultImage,
+    keywords = SEO_CONFIG.defaultKeywords,
+    url = SITE.url,
+    lang = SITE.defaultLang,
+
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <SEO
+            title={title}
+            description={description}
+            image={image}
+            keywords={keywords}
+            url={url}
+    />
     <title>{title}</title>
 </head>
 <body class="antialiased bg-white text-neutral-900 overflow-x-hidden">
-<slot />
+<slot/>
 
 <script>
     // Animaciones on scroll

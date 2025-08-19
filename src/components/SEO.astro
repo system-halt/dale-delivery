@@ -1,0 +1,61 @@
+---
+import {SITE, LANGS, SEO as SEO_CONFIG} from "../config/seo";
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    keywords?: string;
+    url?: string;
+}
+
+const {
+    title = SEO_CONFIG.defaultTitle,
+    description = SEO_CONFIG.defaultDescription,
+    image = SITE.defaultImage,
+    keywords = SEO_CONFIG.defaultKeywords,
+    url = SITE.url,
+}: Props = Astro.props;
+
+const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE.name,
+    url: url,
+    logo: `${SITE.url}${SITE.logo}`,
+    description: description,
+    areaServed: {
+        "@type": "Place",
+        name: "Latinoamérica"
+    },
+    sameAs: [
+        "https://www.facebook.com/daledelivery",
+        "https://www.instagram.com/daledelivery",
+        "https://twitter.com/daledelivery"
+    ]
+};
+---
+<!-- SEO Básico -->
+<meta charset="UTF-8" />
+<meta name="description" content={description}/>
+<meta name="keywords" content={keywords}/>
+<link rel="canonical" href={url}/>
+<!-- 🌍 Hreflang para SEO internacional -->
+<link rel="alternate" href={SITE.url + "/"}/>
+
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content={title}/>
+<meta property="og:description" content={description}/>
+<meta property="og:image" content={image}/>
+<meta property="og:url" content={url}/>
+<meta property="og:site_name" content="Dale Delivery"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content={title}/>
+<meta name="twitter:description" content={description}/>
+<meta name="twitter:image" content={image}/>
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)}></script>

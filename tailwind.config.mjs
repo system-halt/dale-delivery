@@ -1,5 +1,7 @@
+/** @type {import('tailwindcss').Config} */
+
 export default {
-    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
     theme: {
         extend: {
             colors: {
@@ -39,6 +41,9 @@ export default {
                     800: '#262626',
                     900: '#171717',
                 }
+            },
+            backgroundImage: {
+                "header-gradient": "linear-gradient(50deg, #ff3d00 , #ff7f00)",
             },
             fontFamily: {
                 'sans': ['Inter', 'system-ui', 'sans-serif'],
@@ -95,4 +100,4 @@ export default {
         },
     },
     plugins: [],
-}
+};
