@@ -6,7 +6,7 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    50: '#fff7ed',
+                    50: '#2467a6',
                     100: '#ffedd5',
                     200: '#fed7aa',
                     300: '#fdba74',
