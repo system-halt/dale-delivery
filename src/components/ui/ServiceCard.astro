@@ -1,0 +1,58 @@
+---
+export interface Props {
+    title: string;
+    subtitle: string;
+    description: string;
+    bgColor: string;
+    imageBg: string;    // Nueva: Imagen de fondo para la circunferencia
+    imageOverlay: string; // Nueva: Imagen superpuesta rectangular
+    imageOverlayAlt: string;
+}
+
+const {title, subtitle, description, bgColor, imageBg, imageOverlay, imageOverlayAlt} = Astro.props;
+---
+
+<div
+        class={`relative bg-gradient-to-b ${bgColor} shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 mx-auto overflow-visible`}
+        style="border-radius: 100px; width: 279px; height: 411px;"
+>
+    <!-- Circunferencia con imagen de fondo -->
+    <div
+            class="absolute left-1/2 transform -translate-x-1/2 rounded-full shadow-lg"
+            style={`top: -139.4px; width: 278.8px; height: 278.8px; background-image: url(${imageBg}); background-size: cover; background-position: center;`}
+    ></div>
+
+    <!-- Imagen rectangular superpuesta -->
+    <div
+            class="absolute left-1/2 transform -translate-x-1/2  rounded-2xl overflow-hidden"
+            style="top: -229.4px; width: 232px; height: 348px;"
+    >
+        <img
+                src={imageOverlay}
+                alt={imageOverlayAlt}
+                class="w-full h-full object-cover"
+                loading="lazy"
+        />
+    </div>
+
+    <!-- Content Section -->
+    <div
+            class="absolute bottom-0 left-0 right-0 px-6 py-8 text-white text-center"
+            style="padding-top: 160px;"
+    >
+        <!-- Title -->
+        <h3 class="text-2xl lg:text-3xl font-display font-bold mb-3 tracking-wide leading-tight">
+            {title}
+        </h3>
+
+        <!-- Content -->
+        <div class="space-y-3">
+            <p class="text-sm lg:text-base font-semibold opacity-95 leading-tight">
+                {subtitle}
+            </p>
+            <p class="text-xs lg:text-sm opacity-90 leading-relaxed px-2">
+                {description}
+            </p>
+        </div>
+    </div>
+</div>

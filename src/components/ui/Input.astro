@@ -1,0 +1,39 @@
+---
+type InputType = 'text' | 'email' | 'password' | 'tel' | 'url' | 'number' | 'search' | 'date' | 'time' | 'datetime-local' | 'month' | 'week' | 'color';
+
+export interface Props {
+    label: string;
+    name: string;
+    type?: InputType;
+    placeholder?: string;
+    required?: boolean;
+    value?: string;
+    class?: string;
+}
+
+const {
+    label,
+    name,
+    type = 'text',
+    placeholder,
+    required = false,
+    value,
+    class: className = ''
+} = Astro.props;
+---
+
+<div class={`space-y-2 ${className}`}>
+    <label for={name} class="block text-sm font-medium text-secondary-700">
+        {label}
+        {required && <span class="text-red-500 ml-1">*</span>}
+    </label>
+    <input
+            type={type}
+            id={name}
+            name={name}
+            placeholder={placeholder}
+            value={value}
+            required={required}
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:ring-primary-500 transition-colors"
+    />
+</div>

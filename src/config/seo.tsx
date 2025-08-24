@@ -4,6 +4,9 @@ export const SITE = {
     defaultLang: "es",
     logo: "/logo.png",
     defaultImage: "/logo.png",
+    address: "Lima",
+    postalCode: "codigo postal",
+    streetAddress: "127.0.0.1",
 };
 
 export const SEO = {

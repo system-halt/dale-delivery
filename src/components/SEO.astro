@@ -1,5 +1,5 @@
 ---
-import {SITE, LANGS, SEO as SEO_CONFIG} from "../config/seo";
+import {SITE, SEO as SEO_CONFIG} from "../config/seo";
 interface Props {
     title?: string;
     description?: string;
@@ -23,6 +23,15 @@ const schemaData = {
     url: url,
     logo: `${SITE.url}${SITE.logo}`,
     description: description,
+    foundation: "2020",
+    address: {
+        "@type": "PostalAddress",
+        "addressCountry": "PE",
+        "addressLocality": SITE.address,
+        "addressRegion": SITE.address,
+        "postalCode": SITE.postalCode,
+        "streetAddress": SITE.streetAddress
+    },
     areaServed: {
         "@type": "Place",
         name: "Latinoamérica"
@@ -59,4 +68,4 @@ const schemaData = {
 <meta name="twitter:image" content={image}/>
 
 <!-- Schema.org JSON-LD -->
-<script type="application/ld+json" set:html={JSON.stringify(schemaData)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} defer is:inline></script>
