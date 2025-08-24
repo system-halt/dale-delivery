@@ -11,44 +11,48 @@ export interface Props {
 const { title, subtitle, plans, footerText, imageSrc, imageAlt } = Astro.props;
 ---
 
-<div class="relative bg-gradient-to-br from-secondary-700 to-secondary-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 h-full">
-    <!-- Background Image -->
-    <div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-20">
+<div class="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
+    <!-- Header Section with Orange Background -->
+    <div class="bg-gradient-to-r from-orange-500 to-orange-600 p-6 lg:p-8 text-white">
+        <h3 class="text-xl lg:text-2xl xl:text-3xl font-display font-bold mb-3 leading-tight">
+            {title}
+        </h3>
+        <p class="text-sm lg:text-base opacity-95 leading-relaxed">
+            {subtitle}
+        </p>
+    </div>
+
+    <!-- Plans Section with Blue Background -->
+    <div class="bg-gradient-to-br from-blue-600 to-blue-700 px-6 lg:px-8 py-6 text-white">
+        <div class="space-y-3">
+            {plans.map(plan => (
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-base lg:text-lg font-medium italic">{plan}</span>
+                    </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Footer Section with Orange Background -->
+    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 lg:px-8 py-4 text-white">
+        <p class="text-sm lg:text-base font-bold">
+            {footerText}
+        </p>
+    </div>
+
+    <!-- Background Image - Person with packages -->
+    <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-2/5 h-4/5 opacity-80 z-10 pointer-events-none">
         <img
                 src={imageSrc}
                 alt={imageAlt}
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover object-center rounded-l-2xl"
                 loading="lazy"
         />
     </div>
 
-    <!-- Content -->
-    <div class="relative p-8 text-white h-full flex flex-col">
-        <!-- Header -->
-        <div class="mb-8">
-            <h3 class="text-xl lg:text-2xl font-display font-bold mb-4 leading-tight">
-                {title}
-            </h3>
-            <p class="text-sm lg:text-base opacity-90">
-                {subtitle}
-            </p>
-        </div>
-
-        <!-- Plans List -->
-        <div class="space-y-4 mb-8 flex-grow">
-            {plans.map(plan => (
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        <span class="text-sm lg:text-base font-medium">{plan}</span>
-                    </div>
-            ))}
-        </div>
-
-        <!-- Footer -->
-        <div class="text-xs lg:text-sm opacity-80 mt-auto">
-            {footerText}
-        </div>
-    </div>
+    <!-- Overlay to ensure text readability -->
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/10 pointer-events-none"></div>
 </div>
