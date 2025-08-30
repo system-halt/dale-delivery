@@ -5,53 +5,74 @@ import PlansCard from './ui/PlansCard.astro';
 
 <section id="servicios" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
     <div class="w-full px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="mb-56 text-center lg:text-left">
-            <h2 class="text-3xl sm:text-4xl lg:text-6xl font-display font-bold text-primary-500 mb-4">
-                Nuestros servicios
-            </h2>
-        </div>
-        <!-- Services Grid with proper spacing for new card dimensions -->
-        <div class="max-w-7xl mx-auto lg:ml-100 lg:mr-auto ">
+        <div class="max-w-7xl mx-auto">
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-40 lg:gap-8 items-stretch">
-                <!-- Same Day Card -->
-                <ServiceCard
-                        title="SAME DAY"
-                        subtitle="¿Tienes prisa?"
-                        description="Con nuestro servicio exprés, recogemos y entregamos tu paquete el mismo día. Rápido, seguro y sin complicaciones."
-                        bgColor="from-primary-500 to-primary-600"
-                        imageBg="background-inicio.jpg"
-                        imageOverlay="same-day-back.png"
-                        imageOverlayAlt="Persona con paquete para entrega same day"
-                />
+            <!-- Layout de dos columnas -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
 
-                <!-- Next Day Card -->
-                <ServiceCard
-                        title="NEXT DAY"
-                        subtitle="Planifica con tranquilidad."
-                        description="Recogemos hoy y entregamos mañana, manteniendo la seguridad y puntualidad que nos caracteriza, a un precio más conveniente."
-                        bgColor="from-primary-500 to-primary-600"
-                        imageBg="background-inicio.jpg"
-                        imageOverlay="same-day-back.png"
-                        imageOverlayAlt="Persona con paquete para entrega same day"
-                />
+                <!-- Columna Izquierda: Texto + ServiceCards -->
+                <div class="flex flex-col">
+                    <!-- Header con texto - con padding extra arriba para evitar superposición -->
+                    <div class="text-center lg:text-left mb-32 sm:mb-32 pt-8">
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-primary-500 mb-4">
+                            Nuestros servicios
+                        </h2>
+                        <p class="text-gray-600 text-lg lg:text-xl max-w-2xl">
+                            Soluciones de entrega rápidas y confiables adaptadas a tus necesidades específicas
+                        </p>
+                        <br>
+                        <br/>
+                    </div>
 
-                <!-- Plans Card -->
-                <PlansCard
-                        title="PLANES DE ENVÍOS PREPAGO"
-                        subtitle="Obtén hasta el 25% de descuento pagando por adelantado."
-                        plans={[
-                            'Plan Start 10',
-                            'Plan Crece 20',
-                            'Plan Pro 50',
-                            'Plan Elite 100',
-                            'Plan Ultra 200'
-                        ]}
-                        footerText="Precios desde S/7.50 soles"
-                        imageSrc="same-day-back.png"
-                        imageAlt="Repartidor con paquetes"
-                />
+                    <!-- ServiceCards en fila horizontal (1-1) - con espacio adicional para móvil -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-20 sm:gap-4 lg:gap-6 relative z-10">
+                        <!-- Same Day Card -->
+                        <div class="transform hover:scale-[1.02] transition-all duration-300 mb-20 sm:mb-0">
+                            <ServiceCard
+                                    title="SAME DAY"
+                                    subtitle="¿Tienes prisa?"
+                                    description="Con nuestro servicio exprés, recogemos y entregamos tu paquete el mismo día. Rápido, seguro y sin complicaciones."
+                                    bgColor="from-primary-500 to-primary-600"
+                                    imageBg="background-inicio.jpg"
+                                    imageOverlay="same-day-back.png"
+                                    imageOverlayAlt="Persona con paquete para entrega same day"
+                            />
+                        </div>
+
+                        <!-- Next Day Card -->
+                        <div class="transform hover:scale-[1.02] transition-all duration-300">
+                            <ServiceCard
+                                    title="NEXT DAY"
+                                    subtitle="Planifica con tranquilidad."
+                                    description="Recogemos hoy y entregamos mañana, manteniendo la seguridad y puntualidad que nos caracteriza, a un precio más conveniente."
+                                    bgColor="from-blue-500 to-blue-600"
+                                    imageBg="background-inicio.jpg"
+                                    imageOverlay="same-day-back.png"
+                                    imageOverlayAlt="Persona con paquete para entrega next day"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: PlansCard -->
+                <div class="flex items-stretch">
+                    <div class=" w-full transform hover:scale-[1.02] transition-all duration-300">
+                        <PlansCard
+                                title="PLANES DE ENVÍOS PREPAGO"
+                                subtitle="Obtén hasta el 25% de descuento pagando por adelantado."
+                                plans={[
+                                    'Plan Start 10',
+                                    'Plan Crece 20',
+                                    'Plan Pro 50',
+                                    'Plan Elite 100',
+                                    'Plan Ultra 200'
+                                ]}
+                                footerText="Precios desde S/7.50 soles"
+                                imageSrc="plancard.jpg"
+                                imageAlt="Repartidor con paquetes"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
