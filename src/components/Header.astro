@@ -32,17 +32,18 @@
 
             <!-- Mobile Menu Button -->
             <button
-                    class="md:hidden text-white hover:text-primary-100 transition-colors duration-200 p-2 relative menu-btn"
+                    class="md:hidden text-white hover:text-primary-100 transition-colors duration-200 p-2 relative menu-btn focus:outline-none focus:ring-2 focus:ring-white/50 rounded"
                     id="mobile-menu-btn"
                     aria-label="Abrir menú"
                     aria-expanded="false"
+                    type="button"
             >
-                <svg class="w-6 h-6 hamburger-icon transition-opacity duration-200" fill="none" stroke="currentColor"
+                <svg class="w-6 h-6 hamburger-icon transition-all duration-300" fill="none" stroke="currentColor"
                      viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-                <svg class="w-6 h-6 close-icon absolute top-2 left-2 opacity-0 transition-opacity duration-200"
+                <svg class="w-6 h-6 close-icon absolute top-2 left-2 opacity-0 transition-all duration-300"
                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M6 18L18 6M6 6l12 12"></path>
@@ -51,23 +52,26 @@
         </div>
 
         <!-- Mobile Navigation -->
-        <div class="mobile-menu md:hidden" id="mobile-menu">
+        <div class="mobile-menu md:hidden overflow-hidden transition-all duration-300 ease-in-out"
+             id="mobile-menu"
+             style="max-height: 0px; opacity: 1;"
+             data-menu-initialized="false">
             <div class="pt-4 pb-4 border-t border-primary-400 mt-4">
                 <div class="flex flex-col space-y-3">
                     <a href="#inicio"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-2 rounded-lg mobile-link">
+                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
                         INICIO
                     </a>
                     <a href="#servicios"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-2 rounded-lg mobile-link">
+                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
                         SERVICIOS
                     </a>
                     <a href="#por-que-elegirnos"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-2 rounded-lg mobile-link">
+                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
                         ¿POR QUÉ ELEGIRNOS?
                     </a>
                     <a href="#contacto"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-2 rounded-lg mobile-link">
+                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
                         CONTÁCTANOS
                     </a>
                 </div>
@@ -76,77 +80,124 @@
     </nav>
 </header>
 
-<script >
-    // Función que se ejecuta inmediatamente y maneja el estado del menú
-    (function () {
-        let isMenuOpen = false;
-
-        function toggleMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-
-            if (!mobileMenu || !mobileMenuBtn) return;
-
-            isMenuOpen = !isMenuOpen;
-
-            if (isMenuOpen) {
-                // Abrir menú
-                mobileMenu.classList.add('menu-open');
-                mobileMenuBtn.classList.add('menu-open');
-                mobileMenuBtn.setAttribute('aria-expanded', 'true');
-            } else {
-                // Cerrar menú
-                mobileMenu.classList.remove('menu-open');
-                mobileMenuBtn.classList.remove('menu-open');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+<script>
+    // Función para esperar a que el elemento esté disponible
+    function waitForElement(selector, timeout = 5000) {
+        return new Promise((resolve, reject) => {
+            const element = document.querySelector(selector);
+            if (element) {
+                resolve(element);
+                return;
             }
-        }
 
-        function closeMenu() {
-            if (isMenuOpen) {
-                toggleMenu();
+            const observer = new MutationObserver((mutations) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    observer.disconnect();
+                    resolve(element);
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+            setTimeout(() => {
+                observer.disconnect();
+                reject(new Error(`Elemento ${selector} no encontrado después de ${timeout}ms`));
+            }, timeout);
+        });
+    }
+
+    // Función para inicializar el menú móvil
+    async function initializeMobileMenu() {
+        console.log('Inicializando menú móvil...');
+
+        try {
+            // Esperar a que los elementos estén disponibles
+            const [mobileMenu, mobileMenuBtn] = await Promise.all([
+                waitForElement('#mobile-menu'),
+                waitForElement('#mobile-menu-btn')
+            ]);
+
+            console.log('Elementos del menú encontrados correctamente');
+
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                console.log('Toggling menu, estado actual:', isMenuOpen);
+
+                if (!mobileMenu || !mobileMenuBtn) {
+                    console.error('Los elementos del menú ya no están disponibles');
+                    return;
+                }
+
+                isMenuOpen = !isMenuOpen;
+
+                if (isMenuOpen) {
+                    // Abrir menú - usar scrollHeight para obtener la altura real
+                    const scrollHeight = mobileMenu.scrollHeight;
+                    mobileMenu.style.maxHeight = scrollHeight + 'px';
+                    mobileMenuBtn.classList.add('menu-open');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                    console.log('Menú abierto, altura:', scrollHeight);
+                } else {
+                    // Cerrar menú
+                    mobileMenu.style.maxHeight = '0px';
+                    mobileMenuBtn.classList.remove('menu-open');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    console.log('Menú cerrado');
+                }
             }
-        }
 
-        function initializeMenu() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
+            function closeMenu() {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            }
 
             // Event listener para el botón del menú
-            mobileMenuBtn?.addEventListener('click', (e) => {
+            mobileMenuBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Click en botón del menú móvil');
                 toggleMenu();
             });
 
-            // Cerrar menú al hacer click en un link
+            // Cerrar menú al hacer click en un link móvil
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            console.log('Enlaces móviles encontrados:', mobileLinks.length);
+
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
+                    console.log('Click en enlace móvil, cerrando menú');
                     closeMenu();
                 });
             });
 
-            // Cerrar menú al hacer click fuera
+            // Cerrar menú al hacer click fuera del header
             document.addEventListener('click', (e) => {
                 const header = document.querySelector('header');
-                const target = e.target as Element;
+                const target = e.target;
 
-                if (isMenuOpen && header && !header.contains(target)) {
+                if (isMenuOpen && header && target && !header.contains(target)) {
+                    console.log('Click fuera del header, cerrando menú');
                     closeMenu();
                 }
             });
 
-            // Cerrar menú al redimensionar ventana
+            // Cerrar menú al redimensionar la ventana a desktop
             window.addEventListener('resize', () => {
                 if (window.innerWidth >= 768 && isMenuOpen) {
+                    console.log('Redimensión a desktop, cerrando menú móvil');
                     closeMenu();
                 }
             });
 
-            // Smooth scroll para los enlaces
-            const links = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
-
-            links.forEach(link => {
+            // Smooth scroll para todos los enlaces
+            const allLinks = document.querySelectorAll('a[href^="#"]');
+            allLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
 
@@ -165,15 +216,60 @@
                     }
                 });
             });
-        }
 
-        // Inicializar cuando el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeMenu);
-        } else {
-            initializeMenu();
+            console.log('Menú móvil inicializado correctamente');
+
+        } catch (error) {
+            console.error('Error al inicializar el menú móvil:', error);
+
+            // Fallback: intentar una inicialización básica
+            setTimeout(() => {
+                const fallbackMenu = document.getElementById('mobile-menu');
+                const fallbackBtn = document.getElementById('mobile-menu-btn');
+
+                if (fallbackMenu && fallbackBtn) {
+                    console.log('Intentando inicialización fallback...');
+                    let isOpen = false;
+
+                    fallbackBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        isOpen = !isOpen;
+
+                        if (isOpen) {
+                            fallbackMenu.style.maxHeight = '400px';
+                            fallbackBtn.classList.add('menu-open');
+                        } else {
+                            fallbackMenu.style.maxHeight = '0px';
+                            fallbackBtn.classList.remove('menu-open');
+                        }
+                    });
+                }
+            }, 1000);
         }
-    })();
+    }
+
+    // Múltiples formas de inicializar para máxima compatibilidad
+    function tryInitialization() {
+        if (typeof window !== 'undefined') {
+            initializeMobileMenu();
+        }
+    }
+
+    // Método 1: DOMContentLoaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryInitialization);
+    } else {
+        tryInitialization();
+    }
+
+    // Método 2: Astro page load
+    document.addEventListener('astro:page-load', tryInitialization);
+
+    // Método 3: Window load como último recurso
+    window.addEventListener('load', tryInitialization);
+
+    // Método 4: Timeout fallback
+    setTimeout(tryInitialization, 500);
 </script>
 
 <style>
@@ -181,30 +277,28 @@
     .mobile-menu {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .mobile-menu.menu-open {
-        max-height: 400px; /* Altura suficiente para todos los enlaces */
-    }
-
-    /* Transiciones para los iconos del botón */
+    /* Transiciones mejoradas para los iconos del botón */
     .menu-btn .hamburger-icon {
         opacity: 1;
-        transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
 
     .menu-btn .close-icon {
         opacity: 0;
-        transition: opacity 0.2s ease-in-out;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
 
     .menu-btn.menu-open .hamburger-icon {
         opacity: 0;
+        transform: rotate(90deg);
     }
 
     .menu-btn.menu-open .close-icon {
         opacity: 1;
+        transform: rotate(0deg);
     }
 
     /* Estilos responsivos */
@@ -213,12 +307,24 @@
             padding-left: 1rem;
             padding-right: 1rem;
         }
+
+        /* Mejora la experiencia táctil en móvil */
+        .mobile-link:active {
+            transform: translateX(4px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
     }
 
     /* Efecto hover mejorado para móvil */
     @media (max-width: 767px) {
         .mobile-link:hover {
-            transform: translateX(4px);
+            transform: translateX(2px);
         }
+    }
+
+    /* Asegurar que el foco sea visible para accesibilidad */
+    .menu-btn:focus {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
     }
 </style>
