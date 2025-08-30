@@ -51,11 +51,9 @@
             </button>
         </div>
 
-        <!-- Mobile Navigation -->
-        <div class="mobile-menu md:hidden overflow-hidden transition-all duration-300 ease-in-out"
-             id="mobile-menu"
-             style="max-height: 0px; opacity: 1;"
-             data-menu-initialized="false">
+        <!-- Mobile Navigation - CRÍTICO: sin max-height inicial -->
+        <div class="mobile-menu md:hidden transition-all duration-300 ease-in-out"
+             id="mobile-menu">
             <div class="pt-4 pb-4 border-t border-primary-400 mt-4">
                 <div class="flex flex-col space-y-3">
                     <a href="#inicio"
@@ -81,214 +79,160 @@
 </header>
 
 <script>
-    // Función para esperar a que el elemento esté disponible
-    function waitForElement(selector, timeout = 5000) {
-        return new Promise((resolve, reject) => {
-            const element = document.querySelector(selector);
-            if (element) {
-                resolve(element);
+    // Función simplificada para inicializar el menú móvil
+    function initializeMobileMenu() {
+        console.log('Inicializando menú móvil...');
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+        // Guard clause con verificación de null
+        if (!mobileMenu || !mobileMenuBtn) {
+            console.error('No se encontraron los elementos del menú móvil');
+            return;
+        }
+
+        console.log('Elementos del menú encontrados');
+
+        // Establecer estado inicial cerrado
+        mobileMenu.style.maxHeight = '0px';
+        mobileMenu.style.overflow = 'hidden';
+
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            // Verificación adicional por si los elementos se eliminan del DOM
+            if (!mobileMenu || !mobileMenuBtn) {
+                console.error('Los elementos del menú ya no están disponibles');
                 return;
             }
 
-            const observer = new MutationObserver((mutations) => {
-                const element = document.querySelector(selector);
-                if (element) {
-                    observer.disconnect();
-                    resolve(element);
-                }
-            });
+            console.log('Toggle menu, estado actual:', isMenuOpen ? 'ABIERTO' : 'CERRADO');
 
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
+            isMenuOpen = !isMenuOpen;
 
-            setTimeout(() => {
-                observer.disconnect();
-                reject(new Error(`Elemento ${selector} no encontrado después de ${timeout}ms`));
-            }, timeout);
-        });
-    }
-
-    // Función para inicializar el menú móvil
-    async function initializeMobileMenu() {
-        console.log('Inicializando menú móvil...');
-
-        try {
-            // Esperar a que los elementos estén disponibles
-            const [mobileMenu, mobileMenuBtn] = await Promise.all([
-                waitForElement('#mobile-menu'),
-                waitForElement('#mobile-menu-btn')
-            ]);
-
-            console.log('Elementos del menú encontrados correctamente');
-
-            let isMenuOpen = false;
-
-            function toggleMenu() {
-                console.log('Toggling menu, estado actual:', isMenuOpen);
-
-                if (!mobileMenu || !mobileMenuBtn) {
-                    console.error('Los elementos del menú ya no están disponibles');
-                    return;
-                }
-
-                isMenuOpen = !isMenuOpen;
-
-                if (isMenuOpen) {
-                    // Abrir menú - usar scrollHeight para obtener la altura real
-                    const scrollHeight = mobileMenu.scrollHeight;
-                    mobileMenu.style.maxHeight = scrollHeight + 'px';
-                    mobileMenuBtn.classList.add('menu-open');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'true');
-                    console.log('Menú abierto, altura:', scrollHeight);
-                } else {
-                    // Cerrar menú
-                    mobileMenu.style.maxHeight = '0px';
-                    mobileMenuBtn.classList.remove('menu-open');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                    console.log('Menú cerrado');
-                }
+            if (isMenuOpen) {
+                // Abrir menú
+                mobileMenu.style.maxHeight = '300px';
+                mobileMenuBtn.classList.add('menu-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                console.log('Menú ABIERTO');
+            } else {
+                // Cerrar menú
+                mobileMenu.style.maxHeight = '0px';
+                mobileMenuBtn.classList.remove('menu-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                console.log('Menú CERRADO');
             }
+        }
 
-            function closeMenu() {
-                if (isMenuOpen) {
-                    toggleMenu();
-                }
-            }
-
-            // Event listener para el botón del menú
-            mobileMenuBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log('Click en botón del menú móvil');
+        function closeMenu() {
+            if (isMenuOpen) {
                 toggleMenu();
+            }
+        }
+
+        // Event listener para el botón del menú
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Click en botón del menú');
+            toggleMenu();
+        });
+
+        // Cerrar menú al hacer click en enlaces
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        console.log('Enlaces móviles encontrados:', mobileLinks.length);
+
+        mobileLinks.forEach((link, index) => {
+            link.addEventListener('click', () => {
+                console.log('Click en enlace', index + 1, ', cerrando menú');
+                closeMenu();
             });
+        });
 
-            // Cerrar menú al hacer click en un link móvil
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            console.log('Enlaces móviles encontrados:', mobileLinks.length);
+        // Cerrar menú al hacer click fuera - CON TIPADO CORRECTO
+        document.addEventListener('click', (e) => {
+            const header = document.querySelector('header');
+            const target = e.target as HTMLElement | null;
 
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    console.log('Click en enlace móvil, cerrando menú');
-                    closeMenu();
-                });
-            });
+            if (isMenuOpen && header && target && !header.contains(target)) {
+                console.log('Click fuera del header, cerrando menú');
+                closeMenu();
+            }
+        });
 
-            // Cerrar menú al hacer click fuera del header
-            document.addEventListener('click', (e) => {
-                const header = document.querySelector('header');
-                const target = e.target;
+        // Cerrar menú al redimensionar a desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && isMenuOpen) {
+                console.log('Cambio a desktop, cerrando menú');
+                closeMenu();
+            }
+        });
 
-                if (isMenuOpen && header && target && !header.contains(target)) {
-                    console.log('Click fuera del header, cerrando menú');
-                    closeMenu();
-                }
-            });
+        // Smooth scroll - CON TIPADO CORRECTO
+        const allLinks = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+        allLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
 
-            // Cerrar menú al redimensionar la ventana a desktop
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 768 && isMenuOpen) {
-                    console.log('Redimensión a desktop, cerrando menú móvil');
-                    closeMenu();
-                }
-            });
+                const href = link.getAttribute('href');
+                if (!href) return;
 
-            // Smooth scroll para todos los enlaces
-            const allLinks = document.querySelectorAll('a[href^="#"]');
-            allLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
+                const target = document.querySelector(href) as HTMLElement | null;
+                if (target) {
+                    const headerHeight = 80;
+                    const targetPosition = target.offsetTop - headerHeight;
 
-                    const href = link.getAttribute('href');
-                    if (!href) return;
-
-                    const target = document.querySelector(href);
-                    if (target) {
-                        const headerHeight = 80;
-                        const targetPosition = (target as HTMLElement).offsetTop - headerHeight;
-
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            console.log('Menú móvil inicializado correctamente');
-
-        } catch (error) {
-            console.error('Error al inicializar el menú móvil:', error);
-
-            // Fallback: intentar una inicialización básica
-            setTimeout(() => {
-                const fallbackMenu = document.getElementById('mobile-menu');
-                const fallbackBtn = document.getElementById('mobile-menu-btn');
-
-                if (fallbackMenu && fallbackBtn) {
-                    console.log('Intentando inicialización fallback...');
-                    let isOpen = false;
-
-                    fallbackBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        isOpen = !isOpen;
-
-                        if (isOpen) {
-                            fallbackMenu.style.maxHeight = '400px';
-                            fallbackBtn.classList.add('menu-open');
-                        } else {
-                            fallbackMenu.style.maxHeight = '0px';
-                            fallbackBtn.classList.remove('menu-open');
-                        }
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
-            }, 1000);
-        }
+            });
+        });
+
+        console.log('Menú móvil inicializado correctamente');
     }
 
-    // Múltiples formas de inicializar para máxima compatibilidad
-    function tryInitialization() {
-        if (typeof window !== 'undefined') {
-            initializeMobileMenu();
-        }
-    }
-
-    // Método 1: DOMContentLoaded
+    // Inicialización robusta
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', tryInitialization);
+        document.addEventListener('DOMContentLoaded', initializeMobileMenu);
     } else {
-        tryInitialization();
+        initializeMobileMenu();
     }
 
-    // Método 2: Astro page load
-    document.addEventListener('astro:page-load', tryInitialization);
-
-    // Método 3: Window load como último recurso
-    window.addEventListener('load', tryInitialization);
-
-    // Método 4: Timeout fallback
-    setTimeout(tryInitialization, 500);
+    // Para Astro routing
+    document.addEventListener('astro:page-load', initializeMobileMenu);
 </script>
 
 <style>
-    /* Estilos para el menú móvil */
+    /* CRÍTICO: Estilos del menú móvil */
     .mobile-menu {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Transiciones mejoradas para los iconos del botón */
+    /* Estado abierto del menú */
+    .mobile-menu.menu-open {
+        max-height: 300px;
+    }
+
+    /* Transiciones para los iconos */
+    .hamburger-icon,
+    .close-icon {
+        transition: all 0.3s ease-in-out;
+    }
+
     .menu-btn .hamburger-icon {
         opacity: 1;
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transform: rotate(0deg);
     }
 
     .menu-btn .close-icon {
         opacity: 0;
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transform: rotate(-90deg);
     }
 
     .menu-btn.menu-open .hamburger-icon {
@@ -301,30 +245,38 @@
         transform: rotate(0deg);
     }
 
-    /* Estilos responsivos */
+    /* Efectos móviles */
     @media (max-width: 768px) {
         .container {
             padding-left: 1rem;
             padding-right: 1rem;
         }
 
-        /* Mejora la experiencia táctil en móvil */
         .mobile-link:active {
             transform: translateX(4px);
             background-color: rgba(255, 255, 255, 0.15);
         }
-    }
 
-    /* Efecto hover mejorado para móvil */
-    @media (max-width: 767px) {
         .mobile-link:hover {
             transform: translateX(2px);
         }
     }
 
-    /* Asegurar que el foco sea visible para accesibilidad */
+    /* Accesibilidad */
     .menu-btn:focus {
         outline: 2px solid rgba(255, 255, 255, 0.5);
         outline-offset: 2px;
+    }
+
+    /* Asegurar que el menú sea visible en móvil */
+    @media (max-width: 767px) {
+        .mobile-menu {
+            display: block;
+        }
+
+        .mobile-menu > div {
+            opacity: 1;
+            visibility: visible;
+        }
     }
 </style>
