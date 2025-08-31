@@ -2,72 +2,177 @@
 import WhyChooseCard from './ui/WhyChooseCard.astro';
 ---
 
-<section id="por-que-elegirnos" class="py-16 lg:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Vertical "Por qué elegirnos" text -->
-        <div class="flex items-start gap-16">
-            <!-- Vertical Text -->
-            <div class="hidden lg:block">
-                <div class="writing-mode-vertical text-6xl font-display font-bold text-primary-500 tracking-wider">
-                    ¿POR QUÉ ELEGIRNOS?
-                </div>
-            </div>
+<section id="por-que-elegirnos" class="benefits-section">
+    <div class="container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <h2 class="main-title">¿POR QUÉ ELEGIRNOS?</h2>
+        </div>
 
-            <!-- Mobile Header -->
-            <div class="lg:hidden text-center mb-12 w-full">
-                <h2 class="text-3xl font-display font-bold text-secondary-900">
-                    <span class="text-primary-500">¿POR QUÉ</span> ELEGIRNOS?
-                </h2>
-            </div>
+        <!-- Benefits Grid -->
+        <div class="benefits-grid">
+            <!-- Row 1 -->
+            <WhyChooseCard
+                    title="Entregas rápidas"
+                    subtitle="Velocidad sin comprometer la seguridad."
+                    iconSrc="/icons/truck-icon.png"
+                    iconAlt="Camión de entregas rápidas"
+            />
 
-            <!-- Grid of Features -->
-            <div class="flex-1">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <WhyChooseCard
-                            icon="delivery-truck"
-                            title="Entregas rápidas"
-                            description="Velocidad sin comprometer la seguridad. Garantizamos entregas en menos de 24 horas para que tus productos lleguen a tus clientes."
-                    />
+            <WhyChooseCard
+                    title="Rastreo en tiempo real"
+                    subtitle="Mantente informado sobre el estado de tus envíos en todo momento."
+                    iconSrc="/icons/hand-icon.png"
+                    iconAlt="Rastreo en tiempo real"
+            />
 
-                    <WhyChooseCard
-                            icon="location"
-                            title="Rastreo en tiempo real"
-                            description="Mantente informado sobre el estado de tus envíos en todo momento. Conoce la ubicación exacta de tu paquete."
-                    />
+            <WhyChooseCard
+                    title="Logística estable"
+                    subtitle="Cerramos registro de envíos generales hasta las 11 a.m. y medio día para Mercado Libre y Flex."
+                    iconSrc="/icons/agenda-icon.png"
+                    iconAlt="Logística estable"
+            />
 
-                    <WhyChooseCard
-                            icon="clipboard"
-                            title="Logística estable"
-                            description="Cerramos registro de envíos generales hasta las 11 a.m. y medio día para Mercado Libre y Flex."
-                    />
+            <!-- Row 2 -->
+            <WhyChooseCard
+                    title="Precios competitivos"
+                    subtitle="Disfruta de tarifas increíblemente bajas que se ajustan a tu demanda."
+                    iconSrc="/icons/money-icon.png"
+                    iconAlt="Precios competitivos"
+            />
 
-                    <WhyChooseCard
-                            icon="money"
-                            title="Precios competitivos"
-                            description="Disfruta de tarifas increíblemente bajas que se ajustan a tu demanda. El precio incluye IGV, sin cargos adicionales."
-                    />
+            <WhyChooseCard
+                    title="Entregas el mismo día"
+                    subtitle="Garantizamos entregas en menos de 24 horas para que tus productos lleguen a tus clientes."
+                    iconSrc="/icons/calendar-icon.png"
+                    iconAlt="Entregas el mismo día"
+            />
 
-                    <WhyChooseCard
-                            icon="same-day"
-                            title="Entregas el mismo día"
-                            description="Garantizamos entregas en menos de 24 horas para que tus productos lleguen a tus clientes el mismo día."
-                    />
-
-                    <WhyChooseCard
-                            icon="invoice"
-                            title="Damos factura"
-                            description="El precio incluye IGV, sin cargos adicionales. Recibe tu comprobante fiscal correspondiente."
-                    />
-                </div>
-            </div>
+            <WhyChooseCard
+                    title="Damos factura"
+                    subtitle="El precio incluye IGV. Sin cargos adicionales."
+                    iconSrc="/icons/factura-icon.png"
+                    iconAlt="Facturación incluida"
+            />
         </div>
     </div>
 </section>
 
 <style>
-    .writing-mode-vertical {
+    .benefits-section {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .benefits-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        background: radial-gradient(ellipse at center top, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        gap: 4rem;
+        align-items: flex-start;
+    }
+
+    .title-section {
+        text-align: left;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .main-title {
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 900;
+        color: #2563eb;
+        margin: 0;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        position: relative;
+        display: inline-block;
         writing-mode: vertical-rl;
         text-orientation: mixed;
         transform: rotate(180deg);
+    }
+
+    .main-title::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 200px;
+        background: linear-gradient(180deg, transparent 0%, #2563eb 50%, transparent 100%);
+        opacity: 0.3;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        justify-items: center;
+        flex: 1;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .benefits-section {
+            padding: 3rem 0;
+        }
+
+        .container {
+            padding: 0 0.75rem;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .title-section {
+            text-align: center;
+        }
+
+        .main-title {
+            writing-mode: horizontal-tb;
+            text-orientation: mixed;
+            transform: none;
+        }
+
+        .main-title::before {
+            display: none;
+        }
+
+        .benefits-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .benefits-grid {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .benefits-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 </style>
