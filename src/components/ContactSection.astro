@@ -1,5 +1,5 @@
 ---
-import ContactFormField from './ui/ContactFormField.astro';
+import ContactForm from '../components/ui/ContactForm.tsx';
 ---
 
 <section id="contacto" class="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
@@ -50,50 +50,7 @@ import ContactFormField from './ui/ContactFormField.astro';
             <!-- Contact Form -->
             <div class="animate-on-scroll flex h-full" style="animation-delay: 0.2s;">
                 <div class="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-2xl border border-gray-100 flex flex-col w-full h-full">
-                    <form class="contact-form flex flex-col flex-1" action="#" method="POST">
-                        <!-- Name Field -->
-                        <ContactFormField
-                                name="fullName"
-                                label="Nombre Completo"
-                                placeholder="Nombre y apellido campo obligatorio"
-                                required={true}
-                        />
-                        <!-- Email -->
-                        <ContactFormField
-                                name="email"
-                                label="E-mail"
-                                type="email"
-                                placeholder="nombre@mail.com"
-                        />
-                        <!-- Phone -->
-                        <ContactFormField
-                                name="phone"
-                                label="Número de Whatsapp"
-                                type="phone"
-                                placeholder="999 999 999"
-                                required={true}
-                        />
-                        <!-- Weekly Shipments -->
-                        <ContactFormField
-                                name="weeklyShipments"
-                                label="Cantidad de envíos a la semana"
-                                placeholder="Ej: 10-20 envíos"
-                        />
-                        <!-- Pickup District -->
-                        <ContactFormField
-                                name="pickupDistrict"
-                                label="Distrito de recojo de tus envíos"
-                                type="select"
-                                placeholder="Selecciona un distrito"
-                                options={["Lima Centro", "San Isidro", "Miraflores", "Surco", "La Molina", "Otro"]}
-                        />
-                        <!-- Submit Button -->
-                        <button type="submit" class="submit-btn mt-auto">Enviar</button>
-                        <!-- Privacy Notice -->
-                        <p class="privacy-notice">
-                            Al enviar este formulario, aceptas nuestros términos y condiciones de privacidad.
-                        </p>
-                    </form>
+                    <ContactForm client:load/>
                 </div>
             </div>
         </div>

@@ -20,6 +20,8 @@ const {
     lang = SITE.defaultLang,
 
 } = Astro.props;
+
+import { ToasterClient } from "@/components/ToasterClient";
 ---
 
 <!doctype html>
@@ -36,7 +38,7 @@ const {
 </head>
 <body class="antialiased bg-white text-neutral-900 overflow-x-hidden">
 <slot/>
-
+<ToasterClient client:load />
 <script>
     // Animaciones on scroll
     const observerOptions = {
