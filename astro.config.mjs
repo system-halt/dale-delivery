@@ -8,6 +8,8 @@ import react from "@astrojs/react";
 
 import {SITE} from '/src/config/seo.tsx';
 
+import vercel from "@astrojs/vercel/server";
+
 export default defineConfig({
     site: SITE.url,
     integrations: [
@@ -15,5 +17,5 @@ export default defineConfig({
         sitemap(),
         react()
     ],
-    output: 'static',
+    output: 'server', adapter: vercel(),
 });
