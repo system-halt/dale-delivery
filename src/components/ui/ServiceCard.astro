@@ -1,39 +1,37 @@
 ---
+import { Image } from "astro:assets";
+
 export interface Props {
     title: string;
     subtitle: string;
     description: string;
     bgColor: string;
-    imageBg: string;    // Nueva: Imagen de fondo para la circunferencia
-    imageOverlay: string; // Nueva: Imagen superpuesta rectangular
-    imageOverlayAlt: string;
+    imageBg: string; // ruta relativa: /src/assets/... o /public/...
 }
 
-const {title, subtitle, description, bgColor, imageBg, imageOverlay, imageOverlayAlt} = Astro.props;
+const { title, subtitle, description, bgColor, imageBg } = Astro.props;
 ---
 
 <div
         class={`relative bg-gradient-to-b ${bgColor} shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 mx-auto overflow-visible`}
         style="border-radius: 100px; width: 279px; height: 411px;"
 >
-    <!-- Circunferencia con imagen de fondo -->
+    <!-- Circunferencia optimizada con <Image /> -->
     <div
-            class="absolute left-1/2 transform -translate-x-1/2 rounded-full shadow-lg"
-            style={`top: -79.4px; width: 278.8px; height: 278.8px; background-image: url(${imageBg}); background-size: cover; background-position: center;`}
-    ></div>
-
-    <!-- Imagen rectangular superpuesta -->
-    <!--<div-->
-    <!--        class="absolute left-1/2 transform -translate-x-1/2  rounded-2xl overflow-hidden"-->
-    <!--        style="top: -229.4px; width: 232px; height: 348px;"-->
-    <!--&gt;-->
-    <!--    <img-->
-    <!--            src={imageOverlay}-->
-    <!--            alt={imageOverlayAlt}-->
-    <!--            class="w-full h-full object-cover"-->
-    <!--            loading="lazy"-->
-    <!--    />-->
-    <!--</div>-->
+            class="absolute left-1/2 transform -translate-x-1/2 rounded-full shadow-lg overflow-hidden"
+            style="top: -79.4px; width: 278.8px; height: 278.8px;"
+    >
+        <Image
+                src={imageBg}
+                alt={title}
+                width={280}
+                height={280}
+                format="jpg"
+                densities={[1, 1.5, 2]}
+                class="w-full h-full object-cover rounded-full"
+                loading="lazy"
+        />
+    </div>
 
     <!-- Content Section -->
     <div
