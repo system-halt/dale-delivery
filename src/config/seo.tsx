@@ -1,12 +1,12 @@
 export const SITE = {
     name: "Dale Delivery",
-    url: "https://www.systemfailed.tech/",
+    url: "https://www.daledelivey.com/",
     defaultLang: "es",
     logo: "/favicon.svg",
     defaultImage: "/favicon.svg",
     address: "Lima",
-    postalCode: "codigo postal",
-    streetAddress: "127.0.0.1",
+    postalCode: "15001",
+    streetAddress: "Av. Mariano Cornejo 1848, Pueblo Libre, Peru, 15084",
 };
 
 export const SEO = {
@@ -14,7 +14,7 @@ export const SEO = {
     defaultDescription:
         "Tu servicio de delivery y courier confiable. Entregamos paquetes exprés directo a tu casa con rapidez, seguridad y confianza.",
     defaultKeywords:
-        "delivery, dale delivery, courier, directo a tu casa, mensajería, logística, envíos rápidos, servicio exprés, paquetería segura",
+        "delivery, dale delivery, courier, directo a tu casa, mensajería, logística, envíos rápidos, servicio exprés, paquetería segura, lima, peru",
 };
 // 🌍 Idiomas soportados para SEO internacional
 export const LANGS = [

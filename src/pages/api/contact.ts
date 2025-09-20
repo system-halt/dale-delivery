@@ -8,7 +8,7 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Transporter SMTP (ejemplo con Gmail, pero puedes usar otro proveedor)
         const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            host: "mail.daledelivery.com",
             port: 465,
             secure: true,
             auth: {

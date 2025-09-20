@@ -15,26 +15,24 @@ export default function ContactForm() {
 
         const formData = new FormData(formRef.current!);
 
-        const res = await fetch("/api/contact", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                name: formData.get("name"),
-                email: formData.get("email"),
-                phone: formData.get("phone"),
-                quanty: formData.get("quanty"),
-                district: formData.get("district"),
-            }),
-        });
+        try {
+            const res = await fetch("/contact.php", {
+                method: "POST",
+                body: formData, // ✅ enviamos FormData sin headers JSON
+            });
 
-        const data = await res.json();
-        setLoading(false);
+            const data = await res.json();
+            setLoading(false);
 
-        if (data.success) {
-            toast.success("✅ Tu mensaje ha sido enviado correctamente.");
-            formRef.current?.reset();
-        } else {
-            toast.error("❌ Error al enviar el mensaje. Intenta nuevamente.");
+            if (data.success) {
+                toast.success("✅ Tu mensaje ha sido enviado correctamente.");
+                formRef.current?.reset();
+            } else {
+                toast.error("❌ Error al enviar el mensaje. Intenta nuevamente.");
+            }
+        } catch (error) {
+            setLoading(false);
+            toast.error("⚠️ No se pudo conectar con el servidor.");
         }
     };
 
@@ -56,13 +54,7 @@ export default function ContactForm() {
                 <Label htmlFor="name" className="text-gray-700 font-medium">
                     Nombre Completo
                 </Label>
-                <Input
-                    id="name"
-                    name="name"
-                    placeholder="Tu nombre"
-                    required
-                    className="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500"
-                />
+                <Input id="name" name="name" placeholder="Tu nombre" required />
             </div>
 
             {/* Email */}
@@ -76,7 +68,6 @@ export default function ContactForm() {
                     type="email"
                     placeholder="tu@correo.com"
                     required
-                    className="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500"
                 />
             </div>
 
@@ -91,7 +82,6 @@ export default function ContactForm() {
                     type="tel"
                     placeholder="+51999999999"
                     required
-                    className="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500"
                 />
             </div>
 
@@ -106,7 +96,6 @@ export default function ContactForm() {
                     type="text"
                     placeholder="Ej: 10 - 20 envíos"
                     required
-                    className="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500"
                 />
             </div>
 
@@ -121,7 +110,6 @@ export default function ContactForm() {
                     type="text"
                     placeholder="Ej: San Isidro"
                     required
-                    className="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500"
                 />
             </div>
 
