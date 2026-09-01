@@ -11,7 +11,7 @@ import Footer from '../components/Footer.astro';
 
 <Layout lang="es">
     <Header/>
-    <main>
+    <main class="relative overflow-hidden bg-[#070A12]">
         <HeroSection/>
         <ServicesSection/>
         <WhyChooseUs/>
@@ -20,73 +20,60 @@ import Footer from '../components/Footer.astro';
     <Footer/>
 </Layout>
 
-<style>
-    /* Mejoras adicionales de CSS */
-    @keyframes pulse-glow {
+<style is:global>
+    /* Efectos de pulso y resplandor con colores oficiales */
+    @keyframes pulse-orange-glow {
         0%, 100% {
-            box-shadow: 0 0 5px rgba(249, 115, 22, 0.4);
+            box-shadow: 0 0 15px rgba(254, 127, 1, 0.35);
         }
         50% {
-            box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+            box-shadow: 0 0 35px rgba(254, 127, 1, 0.65);
+        }
+    }
+
+    @keyframes pulse-blue-glow {
+        0%, 100% {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.35);
+        }
+        50% {
+            box-shadow: 0 0 35px rgba(37, 99, 235, 0.65);
         }
     }
 
     .animate-pulse-glow {
-        animation: pulse-glow 2s ease-in-out infinite;
+        animation: pulse-orange-glow 2.5s ease-in-out infinite;
     }
 
-    /* Smooth scroll behavior */
-    html {
-        scroll-behavior: smooth;
+    .animate-pulse-blue {
+        animation: pulse-blue-glow 2.5s ease-in-out infinite;
     }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
+    /* Glassmorphism oscuro */
+    .glass-dark {
+        background: rgba(18, 26, 45, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(30, 44, 74, 0.8);
     }
 
-    ::-webkit-scrollbar-track {
-        background: #f1f5f9;
+    .glass-dark-card {
+        background: linear-gradient(135deg, rgba(18, 26, 45, 0.85) 0%, rgba(13, 19, 34, 0.75) 100%);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(30, 44, 74, 0.7);
     }
 
-    ::-webkit-scrollbar-thumb {
-        background: #f97316;
-        border-radius: 4px;
+    /* Focus accesible en tema oscuro */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+        outline: 2px solid #FE7F01;
+        outline-offset: 2px;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: #ea580c;
-    }
-
-    /* Parallax effect for hero background */
-    .parallax-bg {
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    /* Glassmorphism effect */
-    .glass {
-        background: rgba(255, 255, 255, 0.25);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    /* Hover effects */
-    .hover-lift {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .hover-lift:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Animation improvements */
+    /* Reducción de movimiento */
     @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -95,50 +82,6 @@ import Footer from '../components/Footer.astro';
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
             scroll-behavior: auto !important;
-        }
-    }
-
-    /* Focus states for accessibility */
-    button:focus,
-    a:focus,
-    input:focus,
-    select:focus,
-    textarea:focus {
-        outline: 2px solid #f97316;
-        outline-offset: 2px;
-    }
-
-    /* Mobile tap highlights */
-    button, a {
-        -webkit-tap-highlight-color: rgba(249, 115, 22, 0.3);
-    }
-
-    /* Loading states */
-    .loading {
-        pointer-events: none;
-        opacity: 0.6;
-    }
-
-    .loading::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 20px;
-        height: 20px;
-        margin: -10px 0 0 -10px;
-        border: 2px solid transparent;
-        border-top: 2px solid #f97316;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
         }
     }
 </style>

@@ -5,52 +5,95 @@ export interface Props {
     title: string;
     subtitle: string;
     description: string;
-    bgColor: string;
-    imageBg: string; // ruta relativa: /src/assets/... o /public/...
+    type?: "same-day" | "next-day";
+    badgeText?: string;
+    imageBg: string;
+    features?: string[];
 }
 
-const { title, subtitle, description, bgColor, imageBg } = Astro.props;
+const { 
+    title, 
+    subtitle, 
+    description, 
+    type = title.toLowerCase().includes("same") ? "same-day" : "next-day",
+    badgeText = type === "same-day" ? "⚡ Entrega en Horas" : "📦 Más Económico",
+    imageBg,
+    features = type === "same-day" 
+        ? ["Recojo y entrega el mismo día", "Rastreo en tiempo real", "Ideal para emergencias y e-commerce"] 
+        : ["Recojo hoy, entrega mañana", "Tarifas más bajas garantizadas", "Planificación logística eficiente"]
+} = Astro.props;
+
+const isSameDay = type === "same-day";
+const accentColor = isSameDay ? "#FE7F01" : "#2563EB";
+const borderHoverClass = isSameDay ? "hover:border-[#FE7F01]/60 hover:shadow-[#FE7F01]/15" : "hover:border-[#2563EB]/60 hover:shadow-[#2563EB]/15";
+const badgeBgClass = isSameDay ? "bg-[#FE7F01]/15 text-[#FE7F01] border-[#FE7F01]/30" : "bg-[#2563EB]/15 text-blue-400 border-blue-500/30";
+const btnGradientClass = isSameDay ? "bg-gradient-to-r from-[#FE7F01] to-[#FF5500] hover:from-[#e57200] hover:to-[#eb4d00] shadow-[#FE7F01]/25" : "bg-gradient-to-r from-[#2563EB] to-[#004B95] hover:from-[#1d4ed8] hover:to-[#003B75] shadow-[#2563EB]/25";
 ---
 
 <div
-        class={`relative bg-gradient-to-b ${bgColor} shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 mx-auto overflow-visible`}
-        style="border-radius: 100px; width: 279px; height: 411px;"
+    class={`group relative flex flex-col h-full bg-[#0D1322]/90 border border-[#1E2C4A] rounded-2xl overflow-hidden shadow-xl ${borderHoverClass} transition-all duration-300 transform hover:-translate-y-1.5 backdrop-blur-xl`}
 >
-    <!-- Circunferencia optimizada con <Image /> -->
-    <div
-            class="absolute left-1/2 transform -translate-x-1/2 rounded-full shadow-lg overflow-hidden"
-            style="top: -79.4px; width: 278.8px; height: 278.8px;"
-    >
-        <Image
-                src={imageBg}
-                alt={title}
-                width={280}
-                height={280}
-                format="jpg"
-                densities={[1, 1.5, 2]}
-                class="w-full h-full object-cover rounded-full"
-                loading="lazy"
+    <!-- Image Header with Gradient Blend -->
+    <div class="relative h-48 sm:h-52 w-full overflow-hidden">
+        <img
+            src={imageBg}
+            alt={title}
+            class="w-full h-full object-cover object-center filter brightness-90 group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
         />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0D1322] via-[#0D1322]/40 to-transparent"></div>
+        
+        <!-- Type Badge -->
+        <div class="absolute top-3 right-3">
+            <span class={`inline-flex items-center text-xs font-bold px-3 py-1 rounded-full border backdrop-blur-md ${badgeBgClass}`}>
+                {badgeText}
+            </span>
+        </div>
     </div>
 
     <!-- Content Section -->
-    <div
-            class="absolute bottom-0 left-0 right-0 px-6 py-8 text-white text-center"
-            style="padding-top: 160px;"
-    >
-        <!-- Title -->
-        <h3 class="text-2xl lg:text-3xl font-display font-bold mb-3 tracking-wide leading-tight">
-            {title}
-        </h3>
-
-        <!-- Content -->
-        <div class="space-y-3">
-            <p class="text-sm lg:text-base font-semibold opacity-95 leading-tight">
+    <div class="flex flex-col flex-grow p-6 sm:p-7">
+        <!-- Title & Subtitle -->
+        <div class="mb-4">
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-1 group-hover:text-white transition-colors">
+                {title}
+            </h3>
+            <p class="text-sm font-semibold text-slate-300 italic">
                 {subtitle}
             </p>
-            <p class="text-xs lg:text-sm opacity-90 leading-relaxed px-2">
-                {description}
-            </p>
         </div>
+
+        <!-- Description -->
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            {description}
+        </p>
+
+        <!-- Feature List -->
+        <div class="space-y-2.5 mb-6 mt-auto">
+            {features.map((feat) => (
+                <div class="flex items-start gap-2.5">
+                    <div class={`flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-0.5 ${isSameDay ? 'text-[#FE7F01]' : 'text-blue-400'}`}>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs sm:text-sm text-slate-300 font-medium">{feat}</span>
+                </div>
+            ))}
+        </div>
+
+        <!-- Action Button -->
+        <a
+            href={`https://wa.me/928095900?text=Hola,%20me%20interesa%20el%20servicio%20${encodeURIComponent(title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`w-full inline-flex items-center justify-center gap-2 text-white text-xs sm:text-sm font-bold py-3 px-4 rounded-xl shadow-lg transition-all duration-300 ${btnGradientClass}`}
+        >
+            <span>Cotizar {title}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+        </a>
     </div>
 </div>
+

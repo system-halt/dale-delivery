@@ -5,14 +5,14 @@ import heroBackground from "../assets/images/background-inicio.jpg";
 
 <section
     id="inicio"
-    class="relative min-h-screen flex items-start justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 pt-40 md:pt-60"
+    class="relative min-h-[92vh] flex items-center justify-center bg-[#070A12] pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden"
 >
-    <!-- Background Image Overlay -->
-    <div class="absolute inset-0 bg-black/50 z-0">
+    <!-- Background Image with Enhanced Dark Gradient Overlay -->
+    <div class="absolute inset-0 z-0">
         <Image
             src={heroBackground}
             alt="Delivery services background"
-            class="w-full h-full object-cover brightness-50"
+            class="w-full h-full object-cover opacity-25 filter brightness-50 contrast-125"
             loading="eager"
             fetchpriority="high"
             format="jpg"
@@ -20,75 +20,124 @@ import heroBackground from "../assets/images/background-inicio.jpg";
             widths={[640, 768, 1024, 1280, 1536, 1920]}
             sizes="100vw"
         />
+        <!-- Multi-layer dark gradient overlays -->
+        <div class="absolute inset-0 bg-gradient-to-t from-[#070A12] via-[#070A12]/80 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#070A12] via-[#070A12]/60 to-[#070A12]"></div>
     </div>
 
-    <!-- Background decorative elements -->
-    <div class="absolute inset-0 pointer-events-none z-1">
-        <div
-            class="absolute top-20 right-10 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-bounce-slow"
-        >
-        </div>
-        <div
-            class="absolute bottom-20 left-10 w-24 h-24 bg-orange-400 rounded-full opacity-20 animate-pulse"
-        >
-        </div>
+    <!-- Ambient Glow Mesh (Logo Blue & Orange) -->
+    <div class="absolute inset-0 pointer-events-none z-1 overflow-hidden">
+        <!-- Blue ambient glow (top left) -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-[#004B95]/30 rounded-full blur-[120px] animate-pulse-blue"></div>
+        <!-- Orange ambient glow (top right / center) -->
+        <div class="absolute top-1/4 -right-20 w-[30rem] h-[30rem] bg-[#FE7F01]/20 rounded-full blur-[140px] animate-pulse-glow"></div>
+        <!-- Blue subtle glow (bottom center) -->
+        <div class="absolute -bottom-32 left-1/3 w-80 h-80 bg-[#2563EB]/20 rounded-full blur-[100px]"></div>
     </div>
 
     <!-- Main Content -->
-    <div class="relative z-10 container mx-auto px-4 lg:px-8 w-full">
-        <div class="max-w-4xl">
-            <!-- Hero Text -->
-            <header class="animate-fade-in-up mb-6 md:mb-8">
-                <p class="hero-subtitle">ENTREGAMOS RÁPIDO, SEGURO Y</p>
-                <h1 class="hero-title">BOTAME TU DAAAAAAAA</h1>
+    <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="max-w-4xl mx-auto text-center lg:text-left">
+
+            <!-- High-Tech Badge -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-[#1E2C4A] shadow-lg shadow-black/40 mb-6 animate-fade-in">
+                <span class="flex h-2.5 w-2.5 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FE7F01] opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FE7F01]"></span>
+                </span>
+                <span class="text-xs sm:text-sm font-semibold text-slate-200 tracking-wide">
+                    Servicio Courier Express en Lima y Callao
+                </span>
+                <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-[#004B95]/40 text-blue-300 border border-blue-500/30">
+                    DESDE S/6.00
+                </span>
+            </div>
+
+            <!-- Hero Header Text -->
+            <header class="animate-fade-in-up mb-6">
+                <p class="text-[#FE7F01] font-bold text-sm sm:text-base md:text-lg tracking-widest uppercase mb-2">
+                    Entregamos rápido, seguro y
+                </p>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight">
+                    COMPARTIMOS EL <br class="hidden sm:inline" />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FE7F01] via-[#FFA14A] to-[#FE7F01] drop-shadow-[0_0_25px_rgba(254,127,1,0.35)]">
+                        MISMO CAMINO
+                    </span>
+                </h1>
             </header>
 
             <!-- Description -->
             <div
-                class="animate-slide-in-left mb-8 md:mb-12"
-                style="animation-delay: 300ms;"
+                class="animate-slide-in-left mb-8 md:mb-10 max-w-2xl mx-auto lg:mx-0"
+                style="animation-delay: 200ms;"
             >
-                <p class="hero-description">
-                    Envíos Same Day y Next Day en Lima y Callao desde 6 soles,
-                    con seguimiento en tiempo real
+                <p class="text-slate-300 text-base sm:text-lg md:text-xl leading-relaxed font-normal">
+                    Envíos <span class="text-white font-semibold">Same Day</span> y <span class="text-white font-semibold">Next Day</span> con recojo puntual, rastreo en tiempo real y tarifas justas que impulsan el crecimiento de tu negocio.
                 </p>
             </div>
 
             <!-- CTA Buttons -->
             <div
-                class="cta-buttons animate-slide-in-left"
-                style="animation-delay: 500ms;"
+                class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 animate-slide-in-left"
+                style="animation-delay: 350ms;"
             >
                 <a
-                    href="https://wa.me/928095900?text=Hola,%20me%20interesa%20cotizar%20un%20envío"
+                    href="https://wa.me/928095900?text=Hola,%20me%20interesa%20cotizar%20un%20envío%20con%20Dale%20Delivery"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="btn-primary"
+                    class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#FE7F01] to-[#FF5500] hover:from-[#e57200] hover:to-[#eb4d00] text-white font-bold text-base px-8 py-4 rounded-xl shadow-xl shadow-[#FE7F01]/30 hover:shadow-[#FE7F01]/50 transition-all duration-300 transform hover:-translate-y-1 group"
                 >
-                    Cotiza ahora
+                    <svg class="w-5 h-5 fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <span>Cotizar Envío Ahora</span>
                 </a>
-                <a href="#servicios" class="btn-secondary"> Ver servicios </a>
+                <a
+                    href="#servicios"
+                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base px-7 py-4 rounded-xl border border-[#1E2C4A] hover:border-slate-600 transition-all duration-300 backdrop-blur-md"
+                >
+                    <span>Ver Servicios</span>
+                    <svg class="w-4 h-4 text-[#FE7F01]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
             </div>
+
+            <!-- Trust Metrics Grid -->
+            <div
+                class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-[#1E2C4A]/80 animate-fade-in"
+                style="animation-delay: 500ms;"
+            >
+                <div class="bg-[#0D1322]/80 border border-[#1E2C4A]/60 rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-[#FE7F01] text-lg sm:text-2xl font-black mb-0.5">Same Day</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Entrega en horas</div>
+                </div>
+
+                <div class="bg-[#0D1322]/80 border border-[#1E2C4A]/60 rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-[#2563EB] text-lg sm:text-2xl font-black mb-0.5">Next Day</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Tarifas desde S/6</div>
+                </div>
+
+                <div class="bg-[#0D1322]/80 border border-[#1E2C4A]/60 rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-white text-lg sm:text-2xl font-black mb-0.5">100%</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Rastreo en vivo</div>
+                </div>
+
+                <div class="bg-[#0D1322]/80 border border-[#1E2C4A]/60 rounded-xl p-3 sm:p-4 text-center">
+                    <div class="text-[#FE7F01] text-lg sm:text-2xl font-black mb-0.5">+50</div>
+                    <div class="text-slate-400 text-xs sm:text-sm font-medium">Empresas confían</div>
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <!-- Trust Indicator -->
-    <footer
-        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-fade-in"
-        style="animation-delay: 700ms;"
-    >
-        <p class="trust-indicator">
-            Más de 50 empresas confían en nosotros cada día.
-        </p>
-    </footer>
 </section>
 
 <style>
-    /* Animaciones personalizadas */
     @keyframes fadeInUp {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(25px);
         }
         to {
             opacity: 1;
@@ -99,7 +148,7 @@ import heroBackground from "../assets/images/background-inicio.jpg";
     @keyframes slideInLeft {
         from {
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateX(-25px);
         }
         to {
             opacity: 1;
@@ -116,16 +165,6 @@ import heroBackground from "../assets/images/background-inicio.jpg";
         }
     }
 
-    @keyframes bounceSlow {
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-20px);
-        }
-    }
-
     .animate-fade-in-up {
         animation: fadeInUp 0.8s ease-out forwards;
     }
@@ -136,65 +175,5 @@ import heroBackground from "../assets/images/background-inicio.jpg";
 
     .animate-fade-in {
         animation: fadeIn 0.8s ease-out forwards;
-    }
-
-    .animate-bounce-slow {
-        animation: bounceSlow 3s ease-in-out infinite;
-    }
-
-    /* Hero Text Styles */
-    .hero-subtitle {
-        @apply text-white/90 italic font-medium mb-2 md:mb-4 tracking-wide
-        hover:-translate-y-2 hover:scale-105 transition-all duration-500 cursor-pointer;
-        font-size: clamp(0.875rem, 2.5vw, 2.25rem);
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-title {
-        @apply text-white italic font-black leading-none mb-4 md:mb-8
-        transform -skew-x-6 hover:-translate-y-4 hover:scale-105
-        transition-all duration-700 cursor-pointer whitespace-nowrap;
-        font-size: clamp(1.5rem, 8vw, 8rem);
-        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
-        font-family: "Inter", system-ui, sans-serif;
-    }
-
-    .hero-description {
-        @apply text-white/90 text-lg md:text-xl max-w-md leading-relaxed;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Button Styles */
-    .cta-buttons {
-        @apply flex flex-col sm:flex-row gap-4;
-    }
-
-    .btn-primary {
-        @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold
-        px-8 py-4 rounded-xl transition-all duration-300
-        transform hover:scale-105;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-primary:hover {
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-secondary {
-        @apply border-2 border-white/30 hover:border-white text-white font-semibold
-        px-8 py-4 rounded-xl transition-all duration-300
-        backdrop-blur-sm hover:backdrop-blur-md hover:bg-white/10;
-    }
-
-    .trust-indicator {
-        @apply text-white/80 text-center text-sm md:text-base font-medium;
-    }
-
-    /* Z-index específicos para evitar conflictos */
-    .z-0 {
-        z-index: 0;
-    }
-    .z-1 {
-        z-index: 1;
     }
 </style>

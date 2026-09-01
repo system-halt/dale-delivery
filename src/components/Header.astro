@@ -1,38 +1,51 @@
 ---
 ---
-<header class="fixed top-0 left-0 right-0 z-50 bg-header-gradient shadow-md transition-all duration-300">
-    <nav class="container mx-auto px-4 py-3">
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#070A12]/85 backdrop-blur-xl border-b border-[#1E2C4A]/70 transition-all duration-300 shadow-lg shadow-black/40">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
         <div class="flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="/" class="hover:opacity-80 transition-opacity">
-                    <img src="/logo.png" alt="Dale Delivery" class="h-14 w-full object-contain"/>
+                <a href="/" class="group flex items-center gap-2 hover:opacity-95 transition-opacity">
+                    <img src="/logo.png" alt="Dale Delivery Logo" class="h-12 sm:h-14 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(254,127,1,0.2)] transition-transform duration-300 group-hover:scale-105"/>
                 </a>
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+            <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
                 <a href="#inicio"
-                   class="text-white hover:text-primary-100 transition-colors duration-200 font-bold text-sm">
+                   class="nav-link text-slate-300 hover:text-white px-3.5 py-2 rounded-lg text-xs lg:text-sm font-semibold tracking-wider transition-all duration-200 hover:bg-slate-800/50">
                     INICIO
                 </a>
                 <a href="#servicios"
-                   class="text-white hover:text-primary-100 transition-colors duration-200 font-bold text-sm">
+                   class="nav-link text-slate-300 hover:text-white px-3.5 py-2 rounded-lg text-xs lg:text-sm font-semibold tracking-wider transition-all duration-200 hover:bg-slate-800/50">
                     SERVICIOS
                 </a>
                 <a href="#por-que-elegirnos"
-                   class="text-white hover:text-primary-100 transition-colors duration-200 font-bold text-sm">
+                   class="nav-link text-slate-300 hover:text-white px-3.5 py-2 rounded-lg text-xs lg:text-sm font-semibold tracking-wider transition-all duration-200 hover:bg-slate-800/50">
                     ¿POR QUÉ ELEGIRNOS?
                 </a>
                 <a href="#contacto"
-                   class="text-white hover:text-primary-100 transition-colors duration-200 font-bold text-sm">
+                   class="nav-link text-slate-300 hover:text-white px-3.5 py-2 rounded-lg text-xs lg:text-sm font-semibold tracking-wider transition-all duration-200 hover:bg-slate-800/50">
                     CONTÁCTANOS
+                </a>
+            </div>
+
+            <!-- Desktop CTA Button -->
+            <div class="hidden md:flex items-center">
+                <a href="https://wa.me/928095900?text=Hola,%20me%20interesa%20cotizar%20un%20envío%20con%20Dale%20Delivery"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 bg-gradient-to-r from-[#FE7F01] to-[#FF5500] hover:from-[#e57200] hover:to-[#eb4d00] text-white text-xs lg:text-sm font-bold px-4 lg:px-5 py-2.5 rounded-xl shadow-lg shadow-[#FE7F01]/25 hover:shadow-[#FE7F01]/40 transition-all duration-300 transform hover:-translate-y-0.5 group">
+                    <svg class="w-4 h-4 fill-current transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <span>Cotizar Envío</span>
                 </a>
             </div>
 
             <!-- Mobile Menu Button -->
             <button
-                    class="md:hidden text-white hover:text-primary-100 transition-colors duration-200 p-2 relative menu-btn focus:outline-none focus:ring-2 focus:ring-white/50 rounded"
+                    class="md:hidden text-slate-200 hover:text-white p-2.5 relative menu-btn focus:outline-none focus:ring-2 focus:ring-[#FE7F01]/50 rounded-xl bg-slate-900/80 border border-[#1E2C4A]"
                     id="mobile-menu-btn"
                     aria-label="Abrir menú"
                     aria-expanded="false"
@@ -43,7 +56,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-                <svg class="w-6 h-6 close-icon absolute top-2 left-2 opacity-0 transition-all duration-300"
+                <svg class="w-6 h-6 close-icon absolute top-2.5 left-2.5 opacity-0 transition-all duration-300"
                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M6 18L18 6M6 6l12 12"></path>
@@ -51,27 +64,38 @@
             </button>
         </div>
 
-        <!-- Mobile Navigation - CRÍTICO: sin max-height inicial -->
+        <!-- Mobile Navigation -->
         <div class="mobile-menu md:hidden transition-all duration-300 ease-in-out"
              id="mobile-menu">
-            <div class="pt-4 pb-4 border-t border-primary-400 mt-4">
-                <div class="flex flex-col space-y-3">
+            <div class="pt-4 pb-4 border-t border-[#1E2C4A] mt-3 bg-[#0D1322]/95 backdrop-blur-2xl rounded-2xl px-4 shadow-2xl border">
+                <div class="flex flex-col space-y-2 py-2">
                     <a href="#inicio"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
+                       class="text-slate-200 hover:text-[#FE7F01] hover:bg-slate-800/70 transition-all duration-200 font-semibold text-sm px-4 py-3 rounded-xl mobile-link block border-l-2 border-transparent hover:border-[#FE7F01]">
                         INICIO
                     </a>
                     <a href="#servicios"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
+                       class="text-slate-200 hover:text-[#FE7F01] hover:bg-slate-800/70 transition-all duration-200 font-semibold text-sm px-4 py-3 rounded-xl mobile-link block border-l-2 border-transparent hover:border-[#FE7F01]">
                         SERVICIOS
                     </a>
                     <a href="#por-que-elegirnos"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
+                       class="text-slate-200 hover:text-[#FE7F01] hover:bg-slate-800/70 transition-all duration-200 font-semibold text-sm px-4 py-3 rounded-xl mobile-link block border-l-2 border-transparent hover:border-[#FE7F01]">
                         ¿POR QUÉ ELEGIRNOS?
                     </a>
                     <a href="#contacto"
-                       class="text-white hover:text-primary-100 hover:bg-primary-600 transition-all duration-200 font-medium text-sm px-4 py-3 rounded-lg mobile-link block">
+                       class="text-slate-200 hover:text-[#FE7F01] hover:bg-slate-800/70 transition-all duration-200 font-semibold text-sm px-4 py-3 rounded-xl mobile-link block border-l-2 border-transparent hover:border-[#FE7F01]">
                         CONTÁCTANOS
                     </a>
+                    <div class="pt-2">
+                        <a href="https://wa.me/928095900?text=Hola,%20me%20interesa%20cotizar%20un%20envío%20con%20Dale%20Delivery"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#FE7F01] to-[#FF5500] text-white font-bold px-4 py-3 rounded-xl shadow-lg shadow-[#FE7F01]/30 mobile-link">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                            </svg>
+                            <span>Cotizar por WhatsApp</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,50 +103,29 @@
 </header>
 
 <script>
-    // Función simplificada para inicializar el menú móvil
     function initializeMobileMenu() {
-        console.log('Inicializando menú móvil...');
-
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
-        // Guard clause con verificación de null
-        if (!mobileMenu || !mobileMenuBtn) {
-            console.error('No se encontraron los elementos del menú móvil');
-            return;
-        }
+        if (!mobileMenu || !mobileMenuBtn) return;
 
-        console.log('Elementos del menú encontrados');
-
-        // Establecer estado inicial cerrado
         mobileMenu.style.maxHeight = '0px';
         mobileMenu.style.overflow = 'hidden';
 
         let isMenuOpen = false;
 
         function toggleMenu() {
-            // Verificación adicional por si los elementos se eliminan del DOM
-            if (!mobileMenu || !mobileMenuBtn) {
-                console.error('Los elementos del menú ya no están disponibles');
-                return;
-            }
-
-            console.log('Toggle menu, estado actual:', isMenuOpen ? 'ABIERTO' : 'CERRADO');
-
+            if (!mobileMenu || !mobileMenuBtn) return;
             isMenuOpen = !isMenuOpen;
 
             if (isMenuOpen) {
-                // Abrir menú
-                mobileMenu.style.maxHeight = '300px';
+                mobileMenu.style.maxHeight = '400px';
                 mobileMenuBtn.classList.add('menu-open');
                 mobileMenuBtn.setAttribute('aria-expanded', 'true');
-                console.log('Menú ABIERTO');
             } else {
-                // Cerrar menú
                 mobileMenu.style.maxHeight = '0px';
                 mobileMenuBtn.classList.remove('menu-open');
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                console.log('Menú CERRADO');
             }
         }
 
@@ -132,56 +135,44 @@
             }
         }
 
-        // Event listener para el botón del menú
         mobileMenuBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Click en botón del menú');
             toggleMenu();
         });
 
-        // Cerrar menú al hacer click en enlaces
         const mobileLinks = document.querySelectorAll('.mobile-link');
-        console.log('Enlaces móviles encontrados:', mobileLinks.length);
-
-        mobileLinks.forEach((link, index) => {
+        mobileLinks.forEach((link) => {
             link.addEventListener('click', () => {
-                console.log('Click en enlace', index + 1, ', cerrando menú');
                 closeMenu();
             });
         });
 
-        // Cerrar menú al hacer click fuera - CON TIPADO CORRECTO
         document.addEventListener('click', (e) => {
             const header = document.querySelector('header');
             const target = e.target as HTMLElement | null;
 
             if (isMenuOpen && header && target && !header.contains(target)) {
-                console.log('Click fuera del header, cerrando menú');
                 closeMenu();
             }
         });
 
-        // Cerrar menú al redimensionar a desktop
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 768 && isMenuOpen) {
-                console.log('Cambio a desktop, cerrando menú');
                 closeMenu();
             }
         });
 
-        // Smooth scroll - CON TIPADO CORRECTO
         const allLinks = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
         allLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-
                 const href = link.getAttribute('href');
-                if (!href) return;
+                if (!href || href === '#') return;
 
                 const target = document.querySelector(href) as HTMLElement | null;
                 if (target) {
-                    const headerHeight = 80;
+                    e.preventDefault();
+                    const headerHeight = 75;
                     const targetPosition = target.offsetTop - headerHeight;
 
                     window.scrollTo({
@@ -191,35 +182,24 @@
                 }
             });
         });
-
-        console.log('Menú móvil inicializado correctamente');
     }
 
-    // Inicialización robusta
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initializeMobileMenu);
     } else {
         initializeMobileMenu();
     }
 
-    // Para Astro routing
     document.addEventListener('astro:page-load', initializeMobileMenu);
 </script>
 
 <style>
-    /* CRÍTICO: Estilos del menú móvil */
     .mobile-menu {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Estado abierto del menú */
-    .mobile-menu.menu-open {
-        max-height: 300px;
-    }
-
-    /* Transiciones para los iconos */
     .hamburger-icon,
     .close-icon {
         transition: all 0.3s ease-in-out;
@@ -245,38 +225,24 @@
         transform: rotate(0deg);
     }
 
-    /* Efectos móviles */
-    @media (max-width: 768px) {
-        .container {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .mobile-link:active {
-            transform: translateX(4px);
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .mobile-link:hover {
-            transform: translateX(2px);
-        }
+    .nav-link {
+        position: relative;
     }
 
-    /* Accesibilidad */
-    .menu-btn:focus {
-        outline: 2px solid rgba(255, 255, 255, 0.5);
-        outline-offset: 2px;
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #FE7F01, #2563EB);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+        border-radius: 2px;
     }
 
-    /* Asegurar que el menú sea visible en móvil */
-    @media (max-width: 767px) {
-        .mobile-menu {
-            display: block;
-        }
-
-        .mobile-menu > div {
-            opacity: 1;
-            visibility: visible;
-        }
+    .nav-link:hover::after {
+        width: 70%;
     }
 </style>

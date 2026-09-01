@@ -1,6 +1,7 @@
 ---
 import SEO from "../components/SEO.astro";
 import {SITE, SEO as SEO_CONFIG} from "../config/seo";
+import "../styles/global.css";
 
 interface Props {
     title?: string;
@@ -25,7 +26,7 @@ import { ToasterClient } from "@/components/ToasterClient";
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
+<html lang={lang} class="dark scroll-smooth">
 <head>
     <SEO
             title={title}
@@ -35,8 +36,11 @@ import { ToasterClient } from "@/components/ToasterClient";
             url={url}
     />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
 </head>
-<body class="antialiased bg-white text-neutral-900 overflow-x-hidden">
+<body class="antialiased bg-[#070A12] text-slate-100 overflow-x-hidden min-h-screen">
 <slot/>
 <ToasterClient client:load />
 <script>

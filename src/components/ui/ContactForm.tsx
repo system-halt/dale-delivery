@@ -1,8 +1,5 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export default function ContactForm() {
@@ -18,7 +15,7 @@ export default function ContactForm() {
         try {
             const res = await fetch("/contact.php", {
                 method: "POST",
-                body: formData, // ✅ enviamos FormData sin headers JSON
+                body: formData,
             });
 
             const data = await res.json();
@@ -40,87 +37,117 @@ export default function ContactForm() {
         <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="flex flex-col gap-6 w-full h-full p-6 sm:p-8"
+            className="flex flex-col gap-4 sm:gap-5 w-full h-full"
         >
-            <h2 className="text-2xl font-bold text-gray-800 text-center">
-                📩 Contáctanos
-            </h2>
-            <p className="text-gray-600 text-center text-sm">
-                Completa el formulario y nos pondremos en contacto contigo.
-            </p>
+            <div className="text-center sm:text-left mb-2">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-1">
+                    📩 Envíanos un Mensaje
+                </h3>
+                <p className="text-slate-400 text-xs sm:text-sm">
+                    Déjanos tus datos y te responderemos en minutos con la mejor cotización.
+                </p>
+            </div>
 
             {/* Nombre */}
-            <div className="flex flex-col gap-2 w-full">
-                <Label htmlFor="name" className="text-gray-700 font-medium">
-                    Nombre Completo
-                </Label>
-                <Input id="name" name="name" placeholder="Tu nombre" required />
+            <div className="flex flex-col gap-1.5 w-full">
+                <label htmlFor="name" className="text-slate-300 font-semibold text-xs sm:text-sm">
+                    Nombre Completo o Empresa <span className="text-[#FE7F01]">*</span>
+                </label>
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Ej: Juan Pérez / Mi Tienda SAC"
+                    required
+                    className="w-full bg-[#070A12]/90 border border-[#1E2C4A] focus:border-[#FE7F01] focus:ring-2 focus:ring-[#FE7F01]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
+                />
             </div>
 
             {/* Email */}
-            <div className="flex flex-col gap-2 w-full">
-                <Label htmlFor="email" className="text-gray-700 font-medium">
-                    Email
-                </Label>
-                <Input
+            <div className="flex flex-col gap-1.5 w-full">
+                <label htmlFor="email" className="text-slate-300 font-semibold text-xs sm:text-sm">
+                    Correo Electrónico <span className="text-[#FE7F01]">*</span>
+                </label>
+                <input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="tu@correo.com"
+                    placeholder="contacto@tunegocio.com"
                     required
+                    className="w-full bg-[#070A12]/90 border border-[#1E2C4A] focus:border-[#FE7F01] focus:ring-2 focus:ring-[#FE7F01]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
                 />
             </div>
 
-            {/* Teléfono */}
-            <div className="flex flex-col gap-2 w-full">
-                <Label htmlFor="phone" className="text-gray-700 font-medium">
-                    Número de Whatsapp
-                </Label>
-                <Input
+            {/* Teléfono / WhatsApp */}
+            <div className="flex flex-col gap-1.5 w-full">
+                <label htmlFor="phone" className="text-slate-300 font-semibold text-xs sm:text-sm">
+                    Número de WhatsApp <span className="text-[#FE7F01]">*</span>
+                </label>
+                <input
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder="+51999999999"
+                    placeholder="+51 987 654 321"
                     required
+                    className="w-full bg-[#070A12]/90 border border-[#1E2C4A] focus:border-[#FE7F01] focus:ring-2 focus:ring-[#FE7F01]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
                 />
             </div>
 
-            {/* Cantidad */}
-            <div className="flex flex-col gap-2 w-full">
-                <Label htmlFor="quanty" className="text-gray-700 font-medium">
-                    Cantidad de envíos a la semana
-                </Label>
-                <Input
-                    id="quanty"
-                    name="quanty"
-                    type="text"
-                    placeholder="Ej: 10 - 20 envíos"
-                    required
-                />
+            {/* Cantidad de envíos y Distrito (2 cols on tablet/desktop) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5 w-full">
+                    <label htmlFor="quanty" className="text-slate-300 font-semibold text-xs sm:text-sm">
+                        Envíos por semana <span className="text-[#FE7F01]">*</span>
+                    </label>
+                    <input
+                        id="quanty"
+                        name="quanty"
+                        type="text"
+                        placeholder="Ej: 15 - 30 envíos"
+                        required
+                        className="w-full bg-[#070A12]/90 border border-[#1E2C4A] focus:border-[#FE7F01] focus:ring-2 focus:ring-[#FE7F01]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
+                    />
+                </div>
+
+                <div className="flex flex-col gap-1.5 w-full">
+                    <label htmlFor="district" className="text-slate-300 font-semibold text-xs sm:text-sm">
+                        Distrito de recojo <span className="text-[#FE7F01]">*</span>
+                    </label>
+                    <input
+                        id="district"
+                        name="district"
+                        type="text"
+                        placeholder="Ej: San Isidro / Miraflores"
+                        required
+                        className="w-full bg-[#070A12]/90 border border-[#1E2C4A] focus:border-[#FE7F01] focus:ring-2 focus:ring-[#FE7F01]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all duration-200"
+                    />
+                </div>
             </div>
 
-            {/* Distrito */}
-            <div className="flex flex-col gap-2 w-full">
-                <Label htmlFor="district" className="text-gray-700 font-medium">
-                    Distrito de recojo de tus envíos
-                </Label>
-                <Input
-                    id="district"
-                    name="district"
-                    type="text"
-                    placeholder="Ej: San Isidro"
-                    required
-                />
-            </div>
-
-            {/* Botón */}
-            <Button
+            {/* Botón de Enviar */}
+            <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all"
+                className="w-full mt-2 inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#FE7F01] to-[#FF5500] hover:from-[#e57200] hover:to-[#eb4d00] disabled:opacity-60 text-white font-bold text-sm sm:text-base py-3.5 px-6 rounded-xl shadow-lg shadow-[#FE7F01]/30 hover:shadow-[#FE7F01]/50 transition-all duration-300 cursor-pointer transform hover:-translate-y-0.5"
             >
-                {loading ? "Enviando..." : "Enviar"}
-            </Button>
+                {loading ? (
+                    <>
+                        <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                        <span>Enviando información...</span>
+                    </>
+                ) : (
+                    <>
+                        <span>Solicitar Asesoría Personalizada</span>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </>
+                )}
+            </button>
         </form>
     );
 }
+
