@@ -6,7 +6,7 @@ Sitio web moderno para Dale Delivery, empresa de envíos rápidos en Lima y Call
 ## Características
 
 ### 🎨 Diseño Moderno
-- **Navbar fijo**: Permanece visible al hacer scroll
+- **Navbar fijo**: Permanece visible al hacer scroll dsafasdasf
 - **Animaciones suaves**: Elementos que aparecen al hacer scroll
 - **Diseño responsivo**: Optimizado para móviles y desktop
 - **Gradientes modernos**: Colores vibrantes y atractivos
@@ -21,7 +21,7 @@ Sitio web moderno para Dale Delivery, empresa de envíos rápidos en Lima y Call
 1. **Hero Section**: Llamada principal con botones CTA
 2. **Servicios**: Same Day, Next Day y planes de envío
 3. **¿Por qué elegirnos?**: 6 razones con íconos y animaciones
-4. **Contacto**: Formulario completo con validación visual
+4. **Contacto**: Formulario completo con validación visual 151325525rr
 5. **Footer**: Información completa de la empresa
 
 ### 🎯 Funcionalidades
