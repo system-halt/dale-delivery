@@ -1,29 +1,37 @@
 ---
-import { Image } from 'astro:assets';
-import heroBackground from '../assets/images/background-inicio.jpg';
+import { Image } from "astro:assets";
+import heroBackground from "../assets/images/background-inicio.jpg";
 ---
-<section id="inicio" class="relative min-h-screen flex items-start justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 pt-40 md:pt-60">
+
+<section
+    id="inicio"
+    class="relative min-h-screen flex items-start justify-center bg-gradient-to-br from-neutral-100 to-neutral-200 pt-40 md:pt-60"
+>
     <!-- Background Image Overlay -->
     <div class="absolute inset-0 bg-black/50 z-0">
         <Image
-                src={heroBackground}
-                alt="Delivery services background"
-                class="w-full h-full object-cover brightness-50"
-                loading="eager"
-                fetchpriority="high"
-                format='jpg'
-                quality={80}
-                widths={[640, 768, 1024, 1280, 1536, 1920]}
-                sizes="100vw"
+            src={heroBackground}
+            alt="Delivery services background"
+            class="w-full h-full object-cover brightness-50"
+            loading="eager"
+            fetchpriority="high"
+            format="jpg"
+            quality={80}
+            widths={[640, 768, 1024, 1280, 1536, 1920]}
+            sizes="100vw"
         />
     </div>
 
     <!-- Background decorative elements -->
     <div class="absolute inset-0 pointer-events-none z-1">
-        <div class="absolute top-20 right-10 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-bounce-slow"></div>
         <div
-                class="absolute bottom-20 left-10 w-24 h-24 bg-orange-400 rounded-full opacity-20 animate-pulse"
-        ></div>
+            class="absolute top-20 right-10 w-32 h-32 bg-blue-400 rounded-full opacity-20 animate-bounce-slow"
+        >
+        </div>
+        <div
+            class="absolute bottom-20 left-10 w-24 h-24 bg-orange-400 rounded-full opacity-20 animate-pulse"
+        >
+        </div>
     </div>
 
     <!-- Main Content -->
@@ -31,35 +39,44 @@ import heroBackground from '../assets/images/background-inicio.jpg';
         <div class="max-w-4xl">
             <!-- Hero Text -->
             <header class="animate-fade-in-up mb-6 md:mb-8">
-                <p class="hero-subtitle">
-                    ENTREGAMOS RÁPIDO, SEGURO Y
-                </p>
-                <h1 class="hero-title">
-                    SIN COMPLICACIONES
-                </h1>
+                <p class="hero-subtitle">ENTREGAMOS RÁPIDO, SEGURO Y</p>
+                <h1 class="hero-title">BOTAME TU DAAAAAAAA</h1>
             </header>
 
             <!-- Description -->
-            <div class="animate-slide-in-left mb-8 md:mb-12" style="animation-delay: 300ms;">
+            <div
+                class="animate-slide-in-left mb-8 md:mb-12"
+                style="animation-delay: 300ms;"
+            >
                 <p class="hero-description">
-                    Envíos Same Day y Next Day en Lima y Callao desde 6 soles, con seguimiento en tiempo real
+                    Envíos Same Day y Next Day en Lima y Callao desde 6 soles,
+                    con seguimiento en tiempo real
                 </p>
             </div>
 
             <!-- CTA Buttons -->
-            <div class="cta-buttons animate-slide-in-left" style="animation-delay: 500ms;">
-                <a href="https://wa.me/928095900?text=Hola,%20me%20interesa%20cotizar%20un%20envío" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <div
+                class="cta-buttons animate-slide-in-left"
+                style="animation-delay: 500ms;"
+            >
+                <a
+                    href="https://wa.me/928095900?text=Hola,%20me%20interesa%20cotizar%20un%20envío"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-primary"
+                >
                     Cotiza ahora
                 </a>
-                <a href="#servicios" class="btn-secondary">
-                    Ver servicios
-                </a>
+                <a href="#servicios" class="btn-secondary"> Ver servicios </a>
             </div>
         </div>
     </div>
 
     <!-- Trust Indicator -->
-    <footer class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-fade-in" style="animation-delay: 700ms;">
+    <footer
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-fade-in"
+        style="animation-delay: 700ms;"
+    >
         <p class="trust-indicator">
             Más de 50 empresas confían en nosotros cada día.
         </p>
@@ -91,13 +108,22 @@ import heroBackground from '../assets/images/background-inicio.jpg';
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
     @keyframes bounceSlow {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
     }
 
     .animate-fade-in-up {
@@ -130,7 +156,7 @@ import heroBackground from '../assets/images/background-inicio.jpg';
         transition-all duration-700 cursor-pointer whitespace-nowrap;
         font-size: clamp(1.5rem, 8vw, 8rem);
         text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: "Inter", system-ui, sans-serif;
     }
 
     .hero-description {
@@ -165,6 +191,10 @@ import heroBackground from '../assets/images/background-inicio.jpg';
     }
 
     /* Z-index específicos para evitar conflictos */
-    .z-0 { z-index: 0; }
-    .z-1 { z-index: 1; }
+    .z-0 {
+        z-index: 0;
+    }
+    .z-1 {
+        z-index: 1;
+    }
 </style>
